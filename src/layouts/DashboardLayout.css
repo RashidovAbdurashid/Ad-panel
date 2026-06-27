@@ -1,0 +1,32 @@
+.dashboard-shell {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.dashboard-content {
+  margin-left: var(--sidebar-width);
+  padding-top: var(--navbar-height);
+  min-height: 100vh;
+}
+
+.dashboard-content-inner {
+  padding: 28px 32px 60px;
+  max-width: 1320px;
+}
+
+.dashboard-backdrop {
+  position: fixed;
+  inset: 0;
+  top: var(--navbar-height);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 80;
+}
+
+@media (max-width: 900px) {
+  .dashboard-content {
+    margin-left: 0;
+  }
+  .dashboard-content-inner {
+    padding: 22px 18px 50px;
+  }
+}

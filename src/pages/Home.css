@@ -1,0 +1,100 @@
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1000px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .stat-grid { grid-template-columns: 1fr; }
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: -40px;
+  right: -40px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.stat-card--accent::after { background: radial-gradient(circle, var(--accent-soft), transparent 70%); }
+.stat-card--secondary::after { background: radial-gradient(circle, var(--accent-secondary-soft), transparent 70%); }
+
+.stat-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.stat-card--accent .stat-card-icon { background: var(--accent-soft); color: var(--accent); }
+.stat-card--secondary .stat-card-icon { background: var(--accent-secondary-soft); color: var(--accent-secondary); }
+
+.stat-card-value {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.stat-card-label {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .chart-grid { grid-template-columns: 1fr; }
+}
+
+.chart-card h3 {
+  font-size: 14.5px;
+  margin-bottom: 2px;
+}
+
+.recent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.recent-header h3 {
+  font-size: 14.5px;
+}
+
+.recent-link {
+  font-size: 12.5px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.recent-link:hover {
+  text-decoration: underline;
+}
