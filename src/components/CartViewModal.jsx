@@ -1,9 +1,28 @@
-import { FiShoppingBag } from 'react-icons/fi';
+import { useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
+import { FiShoppingBag, FiPackage } from 'react-icons/fi';
 import Modal from './Modal';
 import { formatDate, totalCartQuantity } from '../utils/format';
+import { getProducts } from '../services/productService';
 
 export default function CartViewModal({ isOpen, onClose, cart }) {
+  const [catalog, setCatalog] = useState([]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    getProducts()
+      .then(setCatalog)
+      .catch((error) => toast.error(error.message || 'Failed to load product details.'));
+  }, [isOpen]);
+
+  const catalogById = useMemo(() => {
+    const map = new Map();
+    catalog.forEach((p) => map.set(p.id, p));
+    return map;
+  }, [catalog]);
+
   if (!cart) return null;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={`Cart #${cart.id}`} size="sm">
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18 }}>
@@ -20,16 +39,24 @@ export default function CartViewModal({ isOpen, onClose, cart }) {
       </div>
 
       <div className="cart-view-products">
-        <div className="cart-view-products-header">
-          <span>Product</span>
-          <span>Quantity</span>
-        </div>
-        {cart.products?.map((p, i) => (
-          <div className="cart-view-product-row" key={i}>
-            <span>Product #{p.productId}</span>
-            <span className="mono">{p.quantity}</span>
-          </div>
-        ))}
+        {cart.products?.map((p, i) => {
+          const product = catalogById.get(p.productId);
+          return (
+            <div className="cart-view-product-row cart-view-product-row--img" key={i}>
+              <span className="cart-view-product-thumb">
+                {product ? (
+                  <img src={product.image} alt={product.title} loading="lazy" />
+                ) : (
+                  <FiPackage size={14} />
+                )}
+              </span>
+              <span className="cart-view-product-title">
+                {product ? product.title : `Product #${p.productId}`}
+              </span>
+              <span className="mono">×{p.quantity}</span>
+            </div>
+          );
+        })}
       </div>
 
       <div className="cart-view-total">

@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Users from './pages/Users';
 import CartList from './pages/CartList';
+import Products from './pages/Products';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 
@@ -23,6 +24,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/users" element={<Users />} />
               <Route path="/carts" element={<CartList />} />
+              <Route path="/products" element={<Products />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
           </Route>

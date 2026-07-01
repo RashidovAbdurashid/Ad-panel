@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import { FiHome, FiUsers, FiShoppingCart, FiActivity, FiLogOut } from 'react-icons/fi';
+import { FiHome, FiUsers, FiShoppingCart, FiPackage, FiActivity, FiLogOut } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import './Sidebar.css';
 
 const sidebarLinks = [
   { to: '/', label: 'Home', icon: <FiHome size={17} />, end: true },
   { to: '/users', label: 'Users', icon: <FiUsers size={17} /> },
+  { to: '/products', label: 'Products', icon: <FiPackage size={17} /> },
   { to: '/carts', label: 'Cart List', icon: <FiShoppingCart size={17} /> },
 ];
 
